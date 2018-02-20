@@ -20,4 +20,4 @@ drag your bestiary file on the program then follow the instructions
 
 ## How do I contribute?
 
-A roadmap will soon be added
+Check the fantastic ROADMAP.MD
