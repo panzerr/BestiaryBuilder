@@ -15,6 +15,7 @@ for now :
 
 ## How do I use it?
 
+make sure you have a Bestiary folder where you installed your program
 drag your bestiary file on the program then follow the instructions
 
 ## How do I contribute?
