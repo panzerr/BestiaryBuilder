@@ -60,7 +60,7 @@ void removelastslash(char * toshorten)
   toshorten[lastslash+1] = '\0';
 }
 
-// genere le path vers le bestiaire;
+//  generate the path to the bestiary, TODO put in a separate file
 char * filedest(char * filename)
 {
   char * pathbase = ".\\Bestiary\\";
@@ -119,6 +119,7 @@ void add_at_end(belement * index,belement to_add)
   belement * new;
   int size;
   int i;
+  int tmp;
   do
     {
       printf(" 0 : confirm\n");
@@ -133,17 +134,8 @@ void add_at_end(belement * index,belement to_add)
 	{
 	  new = malloc(sizeof(belement));
 	  printf("CR ?\n");
-	  //we get the CR as a string
-	  fflush(stdin);
-	  fgets(name,40,stdin);
-	  fflush(stdin);
-	  size = strlen(name);
-	  allocname = malloc(size * sizeof(char));
-	  memcpy(allocname,name,size);
-	  allocname[size-1] = '\0';
-	  *new = belt_create(allocname,filedest(allocname));
-	  belt_add(new,to_add);
-	  belt_add(index,*new);
+	  scanf("%d",&tmp);
+	  belt_add_at_cr(index,to_add,tmp);
 	  return;
 	}
       if(userinput < i)
@@ -164,8 +156,8 @@ void add_at_end(belement * index,belement to_add)
 	  allocname[size-1] = '\0';
 	  printf("created : %s\n",allocname);
 	  *new = belt_create(allocname,filedest(allocname));
-	  belt_add(index,*new);
-	  add_at_end(index->subelements+userinput-1,to_add);
+	  tmp = belt_add(index,*new);
+	  add_at_end(index->subelements+tmp,to_add);
 	  return;
 	}
       printf("wrong option \n");
@@ -204,11 +196,17 @@ int main(int argc,char * * argv)
       add_at_end(&index,new);
       //copy the file to the bestiary
       filecpy(file,copypath);
+      //set the levels in the tree
+      belt_set_level(&index);
       //regenerate the html tree
       belt_write(index);
+      // save the files
+      belt_save(index);
+      belt_print(index);
+
     }
-    // save the files
-  belt_save(index);
+    
+      scanf("%d",&lol);
   return 0;
 }
 

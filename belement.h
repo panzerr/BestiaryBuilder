@@ -18,7 +18,11 @@ void belt_print(belement toprint);
 
 belement belt_create(char * name, char * path);
 
-void belt_add(belement * root,belement toAdd);
+int belt_add(belement * root,belement to_add);
+
+void belt_add_at_cr(belement * root, belement to_add,int cr);
+
+void belt_set_level(belement * root);
 
 void belt_write(belement root);
 
