@@ -131,7 +131,19 @@ void add_at_end(belement * index,belement to_add)
       scanf("%d",&userinput);
       if(userinput == 0)
 	{
-	  belt_add(index,to_add);
+	  new = malloc(sizeof(belement));
+	  printf("CR ?\n");
+	  //we get the CR as a string
+	  fflush(stdin);
+	  fgets(name,40,stdin);
+	  fflush(stdin);
+	  size = strlen(name);
+	  allocname = malloc(size * sizeof(char));
+	  memcpy(allocname,name,size);
+	  allocname[size-1] = '\0';
+	  *new = belt_create(allocname,filedest(allocname));
+	  belt_add(new,to_add);
+	  belt_add(index,*new);
 	  return;
 	}
       if(userinput < i)

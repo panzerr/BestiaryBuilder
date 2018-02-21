@@ -12,5 +12,7 @@
 
 ## Interface
  * Add some css to the html files
- * Add a combat rating value and sort the last page by CR
- * Sort the trees (probably in the belt_add function), this is going to be a pai
+ * Sort the trees (probably in the belt_add function), this is going to be a pain
+
+## Bugs
+ * For some reason the copy adds a bunch of gibberish to the end of the html file 
