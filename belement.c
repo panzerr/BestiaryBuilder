@@ -28,19 +28,46 @@ belement belt_create(char * name, char * path)
 
 void belt_add(belement * root,belement to_add)
 {
+  belement * new;
+  belement * prev;
+  int i,j,already_added;
+  i = 0; j = 0;
+  already_added = -1;
   if (root == NULL)
     exit(1);
+  prev = root->subelements; // we will need to free this after
+  new = malloc((root->subelements_size+1) * sizeof(belement));
+  for ( i = 0 ; i < root->subelements_size ; i ++)
+    {
+      if(already_added == 0 || strcmp(to_add.name,prev[i].name) > 0)
+	{
+	  new[j] = prev[i];
+	  j++;
+	}
+      else
+	{
+	  new[j] = to_add;
+	  j++;
+	  new[j] = prev[i];
+	  j++;
+	  already_added = 0;
+	}
+      printf("i : %d, j : %d \n",i,j);
+    }
+  if (already_added != 0)
+    {
+      new[j] = to_add;
+    }
+  root->subelements = new;
+  free(prev);
   root->subelements_size ++;
-  root->subelements = realloc(root->subelements,(root->subelements_size) * sizeof(belement));
-  root->subelements[root->subelements_size-1] = to_add;
   root->level = 1;
 }
-
 
 void belt_write(belement root)
 {
   if (root.level == 0)
-    return;
+     return;
   FILE *fp;
   int i;
   if((fp = fopen(root.path, "w+")) == NULL)

@@ -187,7 +187,6 @@ int main(int argc,char * * argv)
   char file[MAX_PATH+1];
   char programpath[MAX_PATH+1];
   
-  index = belt_init();
     if (argc > 1)
     {
       //save the path of the dragged file and move to the program directory
@@ -195,6 +194,8 @@ int main(int argc,char * * argv)
       GetModuleFileName(NULL,programpath,MAX_PATH+1);
       removelastslash(programpath);
       SetCurrentDirectory(programpath);
+      //init
+      index = belt_init();
       //build the bestiary element for the new file
       name = getname(file);
       copypath = filedest(name);
