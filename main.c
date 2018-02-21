@@ -4,16 +4,11 @@
 #include "belement.h"
 #include <unistd.h>
 
-#define DEBUG
+#define DEBUG 0
 
+#define debug_print(fmt, ...) \
+            do { if (DEBUG) fprintf(stderr, fmt, __VA_ARGS__); } while (0)
 
-void debugmess(char * mess)
-{
-#ifdef DEBUG
-  printf("%s\n",mess);
-#endif
-  return;
-}
 
 char * getname(char * filepath)
 {
@@ -74,7 +69,7 @@ char * filedest(char * filename)
   strcpy(ret,pathbase);
   strcat(ret,filename);
   strcat(ret,fileterm);
-  debugmess(ret);
+  debug_print("%s\n",ret);
   return ret;
   
 }
@@ -173,39 +168,54 @@ void add_at_end(belement * index,belement to_add)
   while(1);
 }
 
-
-
+//get the full path of added files
+char * * rebuild_paths(char * * source,int size)
+{
+  int i;
+  char * * retval;
+  retval = malloc(size * sizeof(char*));
+  for ( i = 0 ; i < size ; i++ )
+    {
+      retval[i] = malloc((MAX_PATH+1)*sizeof(char));
+      printf("%s\n",source[i]);
+      GetFullPathName(source[i],MAX_PATH+1,retval[i],NULL);
+      printf("test\n");
+      debug_print("i = %d \n",i);
+    }
+  return retval;
+}
 
 
 int main(int argc,char * * argv)
 {
-  int lol;
+  int lol,i;
   char * name;
   char * copypath;
   belement index;
   belement new;
-  char file[MAX_PATH+1];
+  char ** files;
   char programpath[MAX_PATH+1];
-  
     if (argc > 1)
     {
-      //save the path of the dragged file and move to the program directory
-      GetFullPathName(argv[1],MAX_PATH+1,file,NULL);
+      files = rebuild_paths(argv+1,argc-1);
       GetModuleFileName(NULL,programpath,MAX_PATH+1);
       removelastslash(programpath);
-      SetCurrentDirectory(programpath);
+      SetCurrentDirectory(programpath);      
       //init
       index = belt_init();
-      //build the bestiary element for the new file
-      name = getname(file);
-      copypath = filedest(name);
-      new = belt_create(name,copypath);
-      //add the element
-      add_at_end(&index,new);
-      //copy the file to the bestiary
-      filecpy(file,copypath);
-      //set the levels in the tree
-      belt_set_level(&index);
+      for (i = 0 ; i < argc-1 ; i++)
+	{
+	  //build the bestiary element for the new file
+	  name = getname(files[i]);
+	  copypath = filedest(name);
+	  new = belt_create(name,copypath);
+	  //add the element
+	  add_at_end(&index,new);
+	  //copy the file to the bestiary
+	  filecpy(files[i],copypath);
+	  //set the levels in the tree
+	  belt_set_level(&index);
+	}
       //regenerate the html tree
       belt_write(index);
       // save the files
@@ -213,7 +223,7 @@ int main(int argc,char * * argv)
 
     }
     
-      scanf("%d",&lol);
+    scanf("%d",&lol);
   return 0;
 }
 
