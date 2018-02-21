@@ -133,7 +133,7 @@ void belt_set_level(belement * root)
 	{
 	  belt_set_level(root->subelements+i);
 	  root->level = belt_get_max_level(root->subelements,root->subelements_size)+1;
-	  printf("level of %s is %d \n",root->name,root->level);
+	  //printf("level of %s is %d \n",root->name,root->level);
 	}
     }
 

@@ -122,6 +122,14 @@ void add_at_end(belement * index,belement to_add)
   int tmp;
   do
     {
+      if(index->level == 2)
+	{
+	  new = malloc(sizeof(belement));
+	  printf("CR ?\n");
+	  scanf("%d",&tmp);
+	  belt_add_at_cr(index,to_add,tmp);
+	  return;
+	}
       printf(" 0 : confirm\n");
       for ( i = 0 ; i < index->subelements_size ; i++)
 	{
@@ -202,7 +210,6 @@ int main(int argc,char * * argv)
       belt_write(index);
       // save the files
       belt_save(index);
-      belt_print(index);
 
     }
     
