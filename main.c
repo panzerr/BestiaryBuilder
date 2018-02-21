@@ -4,7 +4,7 @@
 #include "belement.h"
 #include <unistd.h>
 
-#define DEBUG 0
+#define DEBUG 1
 
 #define debug_print(fmt, ...) \
             do { if (DEBUG) fprintf(stderr, fmt, __VA_ARGS__); } while (0)
@@ -36,7 +36,7 @@ char * getname(char * filepath)
   size = end - 1 - start;
   retvalue = malloc(size * sizeof(char));
   // copy
-  printf( "%d %d \n", start,size);
+  debug_print( "%d %d \n", start,size);
   memcpy(retvalue, (filepath + start + 1), size);
   retvalue[size] = '\0';
   return retvalue;
@@ -115,6 +115,7 @@ void add_at_end(belement * index,belement to_add)
   int size;
   int i;
   int tmp;
+  printf("currently adding %s\n",to_add.name);
   do
     {
       if(index->level == 2)
@@ -177,10 +178,7 @@ char * * rebuild_paths(char * * source,int size)
   for ( i = 0 ; i < size ; i++ )
     {
       retval[i] = malloc((MAX_PATH+1)*sizeof(char));
-      printf("%s\n",source[i]);
       GetFullPathName(source[i],MAX_PATH+1,retval[i],NULL);
-      printf("test\n");
-      debug_print("i = %d \n",i);
     }
   return retval;
 }
@@ -223,7 +221,7 @@ int main(int argc,char * * argv)
 
     }
     
-    scanf("%d",&lol);
+    //scanf("%d",&lol);
   return 0;
 }
 
