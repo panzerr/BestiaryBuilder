@@ -214,6 +214,10 @@ int main(int argc,char * * argv)
 	  //set the levels in the tree
 	  belt_set_level(&index);
 	}
+      else
+	{
+	  index = belt_init();
+	}
       //regenerate the html tree
       belt_write(index);
       // save the files
