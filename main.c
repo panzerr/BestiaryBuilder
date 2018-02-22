@@ -85,20 +85,17 @@ void filecpy(char * file1,char * file2)
 
     if ((fp1 = fopen(file1, "r")) == NULL)
     {
-        printf("\nFile cannot be opened.");
+      //      debug_print("\nFile cannot be opened.");
         return;
     }
     else
     {
-        printf("\nFile opened for copy...\n ");
+      //debug_print("\nFile opened for copy...\n ");
     }
     fp2 = fopen(file2, "w+");
-    fseek(fp1, 0L, SEEK_END);   // File pointer at end of file
-    pos = ftell(fp1);
-    fseek(fp1, 0L, SEEK_SET);   // File pointer set at start
-    while (pos--)
+    while ((ch = fgetc(fp1)) != EOF)
     {
-        ch = fgetc(fp1);    // Copying file character by character
+            // Copying file character by character
         fputc(ch, fp2);
     }
     fclose(fp1);
@@ -214,18 +211,18 @@ int main(int argc,char * * argv)
 	  //set the levels in the tree
 	  belt_set_level(&index);
 	}
-      else
-	{
-	  index = belt_init();
-	}
-      //regenerate the html tree
-      belt_write(index);
-      // save the files
-      belt_save(index);
-
     }
+    else
+      {
+	index = belt_init();
+      }
+    //regenerate the html tree
+    belt_write(index);
+    // save the files
+    belt_save(index);
+      
     
     //scanf("%d",&lol);
-  return 0;
+    return 0;
 }
 

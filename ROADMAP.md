@@ -15,7 +15,6 @@
  * Add some css to the html files
 
 ## Bugs
- * For some reason the copy adds a bunch of gibberish to the end of the html file
 
 ## Big Features
  * Add links from the web
