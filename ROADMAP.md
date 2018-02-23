@@ -6,7 +6,6 @@
  * save/cleanup functionality
 
 ## Code structure
- * Create a makefile or equivalent
  * Add commentary
  * Move string manipulation function to a specific file
  * Separate the command line interface from the bestiary elements logic

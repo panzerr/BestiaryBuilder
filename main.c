@@ -81,7 +81,6 @@ void filecpy(char * file1,char * file2)
 {
     FILE *fp1, *fp2;
     char ch;
-    int pos;
 
     if ((fp1 = fopen(file1, "r")) == NULL)
     {
@@ -183,7 +182,7 @@ char * * rebuild_paths(char * * source,int size)
 
 int main(int argc,char * * argv)
 {
-  int lol,i;
+  int i;
   char * name;
   char * copypath;
   belement index;
