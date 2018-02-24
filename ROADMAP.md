@@ -1,7 +1,6 @@
 # Roadmap/todolist
 
 ## Usability
- * Creating the ./Bestiary folder if it does not exist
  * Be able to modify the tree
  * save/cleanup functionality
 
