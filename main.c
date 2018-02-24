@@ -125,7 +125,7 @@ void add_at_end(belement * index,belement to_add)
       printf(" 0 : confirm\n");
       for ( i = 0 ; i < index->subelements_size ; i++)
 	{
-	  printf(" %d : %s \n", i+1, index->subelements[i].name);
+	  printf("%d : %s \n", i+1, index->subelements[i].name);
 	}
       i++;
       printf("%d : new\n",i);
@@ -220,8 +220,6 @@ int main(int argc,char * * argv)
     // save the files
     belt_save(index);
       
-    
-    //scanf("%d",&lol);
     return 0;
 }
 

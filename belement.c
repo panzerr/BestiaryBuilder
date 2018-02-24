@@ -298,6 +298,7 @@ belement belt_init()
   belement ret;
   char * name;
   char * path;
+  CreateDirectory(".\\Bestiary",NULL);
   if ( file_exists(".\\data.save") == 0)
     {
       printf("load file \n");
