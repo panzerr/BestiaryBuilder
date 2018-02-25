@@ -1,3 +1,7 @@
+#ifndef _BELEMENT
+
+#define _BELEMENT
+
 //datatypes for monsters
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,3 +35,5 @@ void belt_save(belement root);
 belement belt_load();
 
 belement belt_init();
+
+#endif
